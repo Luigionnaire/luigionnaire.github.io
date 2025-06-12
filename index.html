@@ -1,2 +1,62 @@
-<div></div>
-<head> Hello </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2em;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    .project {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: white;
+      padding: 1em;
+      margin-bottom: 2em;
+    }
+    .project img, .project video {
+      max-width: 800px;
+      height: auto;
+      border-radius: 4px;
+      margin-top: 1em;
+    }
+    .project a {
+      display: inline-block;
+      margin-top: 1em;
+      text-decoration: none;
+      color: #0366d6;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Luigi De Marco - Dev Portfolio</h1>
+
+  <div class="Vulkan">
+    <h2>Vulkan Renderer</h2>
+    <p>This was submitted as the final deliverable for the Games Programming university course at DMU Leicester.
+    It is a rendering application which utilises the Vulkan API to render a 3D scene with PBR lighting.
+    The entire project, including build files and dependencies, were made from scratch.
+    Currently still in development as more features are being added, with plans to develop it into a game engine for learning purposes.</p>
+    
+    <!-- Replace with your image or video -->
+    <!--<img src="media/vulkan_barrel.png" alt="Vulkan Screenshot">
+  or use a video instead: -->
+    <video controls autoplay loop muted>
+      <source src="media/vulkan_video.mp4">
+      Your browser does not support the video tag.
+    </video>
+
+
+    <a href="https://github.com/Luigionnaire/VulkanApp" target="_blank">View Repository</a>
+  </div>
+
+</body>
+</html>
