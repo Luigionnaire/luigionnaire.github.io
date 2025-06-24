@@ -44,8 +44,8 @@
     <h2>Vulkan Renderer</h2>
     <p>This was submitted as the final deliverable for the Games Programming university course at DMU Leicester.
     It is a rendering application which utilises the Vulkan API to render a 3D scene with PBR lighting.
-    The entire project, including build files and dependencies, were made from scratch.
-    Currently still in development as more features are being added, with plans to develop it into a game engine for learning purposes.</p>
+    <br>The entire project, including build files and dependencies, were made from scratch.<br>
+    It is currently still in development as more features are being added, with plans to develop it into a game engine for learning purposes.</p>
     
 
     <video controls autoplay loop muted>
@@ -55,42 +55,78 @@
 
 
     <a href="https://github.com/Luigionnaire/VulkanApp" target="_blank">View Repository</a>
-  </div>
-  <div class="project">
-    <h2>Space Fighter</h2>
-    <p>A very simple spaceship shooter game made for my JavaScript module during the second year of University.
-      The goal was to demonstrate an understanding of the JavaScript language focusing on real time graphics.
-      The inspiration for this project was a PlayStation2 game called "Psyvariar".
-    </p>
     
-    <a href="https://demadev.co.uk/Space_Fighter" target="_blank">Play this game!</a>
-
-    <video controls autoplay loop muted>
-      <source src="media/spaceFighter.mp4">
-      Your browser does not support the video tag.
-    </video>
-
-    <a href="https://github.com/Luigionnaire/Space_Fighter" target="_blank">View Repository</a>
   </div>
 
-  </div>
+<div class="project">
+  <h2>Asteroid Belt</h2>
+  <p>This was the project we worked on during our "Performant Rendering" class.
+    A working game was provided, using an existing game engine, and our goal was to use modern optimisation techniques to improve frame times and memory utilisation.
+    <br>For this, I implemented:<br>
+    <ul>
+    <li>Entity Component System (ECS)</li>
+    <li>Removed redundant GPU bindings</li>
+    <li>Deferred rendering</li>
+    <li>Level of Detail (LOD) using MeshOptimizer</li>
+    <li>SIMD instructions</li>
+    <li>Broadphase collision detection</li>
+    <li>Instanced rendering</li>
+    Throughout the project, I tracked and recorded performance differences using the Tracy profiler, assisted by RenderDoc and Nvidia Nsight usage.
+  </ul>
+  </p>
+
+  <video controls autoplay loop muted>
+    <source src="media/Asteroid belt.mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <a href="https://github.com/GAMR3531/cw24-Luigionnaire" target="_blank">View Repository</a>
+</div>
+
   <div class="project">
     <h2>Witch Hunt</h2>
     <p>This is a prototype for an online multiplayer ARPG game.
       Developed using Unreal Engine, "Witch Hunt" was a group project. The purpose of 
       which was to learn how to utilise C++ efficiently within Unreal Engine,
-      as well as implementing a multiplayer aspect.
-      I was in charge of the Player movement, spell system, and coordinating implementations.
+      as well as implementing an online multiplayer aspect.
+      <br>I was responsible for:<br>
+      <ul>
+        <li>Player Movement</li>
+        <li>Creating a modular spell system</li>
+        <li>Implementing each team member's code within the project</li>
+      </ul>
+      
+
     </p>
     
-
+    
     <video controls autoplay loop muted>
       <source src="media/WitchHunt.mp4">
       Your browser does not support the video tag.
     </video>
-
-
+    
+    
     <p>Repository not available</p>
   </div>
+
+</div>
+<div class="project">
+  <h2>Space Fighter</h2>
+  <p>A very simple spaceship shooter game made for my JavaScript module during the second year of University.
+    The goal was to demonstrate an understanding of the JavaScript language focusing on real time graphics.
+    The inspiration for this project was a PlayStation2 game called "Psyvariar".
+  </p>
+  
+  <a href="https://demadev.co.uk/Space_Fighter" target="_blank">Play this game!</a>
+
+  <video controls autoplay loop muted>
+    <source src="media/spaceFighter.mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <a href="https://github.com/Luigionnaire/Space_Fighter" target="_blank">View Repository</a>
+</div>
+
+
 </body>
 </html>
