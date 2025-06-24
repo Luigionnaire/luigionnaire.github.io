@@ -62,17 +62,18 @@
   <h2>Asteroid Belt</h2>
   <p>This was the project we worked on during our "Performant Rendering" class.
     A working game was provided, using an existing game engine, and our goal was to use modern optimisation techniques to improve frame times and memory utilisation.
-    <br>For this, I implemented:<br>
+  <br>For this, I implemented:<br>
     <ul>
-    <li>Entity Component System (ECS)</li>
-    <li>Removed redundant GPU bindings</li>
-    <li>Deferred rendering</li>
-    <li>Level of Detail (LOD) using MeshOptimizer</li>
-    <li>SIMD instructions</li>
-    <li>Broadphase collision detection</li>
-    <li>Instanced rendering</li>
-    Throughout the project, I tracked and recorded performance differences using the Tracy profiler, assisted by RenderDoc and Nvidia Nsight usage.
-  </ul>
+      <li>Entity Component System (ECS)</li>
+      <li>Removed redundant GPU bindings</li>
+      <li>Deferred rendering</li>
+      <li>Level of Detail (LOD) using MeshOptimizer</li>
+      <li>SIMD instructions</li>
+      <li>Broadphase collision detection</li>
+      <li>Instanced rendering</li>
+    </ul>
+  <br>Throughout the project, I tracked and recorded performance differences using the Tracy profiler, assisted by RenderDoc and Nvidia Nsight usage.<br>
+  <br>After all the techniques were implemented, I saw a performance difference in frame time of about 500%<br>
   </p>
 
   <video controls autoplay loop muted>
@@ -81,6 +82,31 @@
   </video>
 
   <a href="https://github.com/GAMR3531/cw24-Luigionnaire" target="_blank">View Repository</a>
+</div>
+
+<div class="project">
+  <h2>Advanced Shaders demo</h2>
+  <p>This was the project we worked on during our "Advanced Shader Programming" class.
+    For this class, a game renderer was provided, the goal was to implement modern rendering techniques and shaders.
+  <br>For this, I implemented:<br>
+    <ul>
+      <li>Shadow Mapping</li>
+      <li>Several material and post processing shaders</li>
+      <li>Deferred rendering</li>
+      <li>Noise generation applied to terrain</li>
+      <li>Particles using compute shaders</li>
+      <li>SSBOs</li>
+      <li>Physically Based Rendering</li>
+    </ul>
+    <br>Most of the parameters are modifiable using an ImGUI interface using uniforms<br>
+  </p>
+
+  <video controls autoplay loop muted>
+    <source src="media/Adv Shaders.mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <a href="https://github.com/GAMR3521/coursework-startpoint-Luigionnaire" target="_blank">View Repository</a>
 </div>
 
   <div class="project">
