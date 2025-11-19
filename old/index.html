@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="style.css">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Luigi De Marco - Dev Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2em;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    .project {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: white;
+      padding: 1em;
+      margin-bottom: 2em;
+    }
+    .project img, .project video {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-top: 1em;
+      align-items: center;
+    }
+    .project a {
+      display: inline-block;
+      margin-top: 1em;
+      text-decoration: none;
+      color: #0366d6;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Luigi De Marco - Dev Portfolio</h1>
+
+  <div class="project">
+    <h2>Vulkan Renderer</h2>
+    <p>This was submitted as the final deliverable for the Games Programming university course at DMU Leicester.
+    It is a rendering application which utilises the Vulkan API to render a 3D scene with PBR lighting.
+    <br>The entire project, including build files and dependencies, were made from scratch.<br>
+    </p>
+    
+
+    <video controls autoplay loop muted>
+      <source src="media/vulkan_video.mp4">
+      Your browser does not support the video tag.
+    </video>
+
+
+    <a href="https://github.com/Luigionnaire/VulkanApp" target="_blank">View Repository</a>
+    
+  </div>
+
+<div class="project">
+  <h2>Asteroid Belt</h2>
+  <p>This was the project we worked on during our "Performant Rendering" class.
+    A working game was provided, using an existing game engine, and our goal was to use modern optimisation techniques to improve frame times and memory utilisation.
+  <br>For this, I implemented:<br>
+    <ul>
+      <li>Entity Component System (ECS)</li>
+      <li>Removed redundant GPU bindings</li>
+      <li>Deferred rendering</li>
+      <li>Level of Detail (LOD) using MeshOptimizer</li>
+      <li>SIMD instructions</li>
+      <li>Broadphase collision detection</li>
+      <li>Instanced rendering</li>
+    </ul>
+  <br>Throughout the project, I tracked and recorded performance differences using the Tracy profiler, assisted by RenderDoc and Nvidia Nsight usage.<br>
+  <br>After all the techniques were implemented, I saw a performance difference in frame time of about 500%<br>
+  </p>
+
+  <video controls autoplay loop muted>
+    <source src="media/Asteroid belt.mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <a href="https://github.com/GAMR3531/cw24-Luigionnaire" target="_blank">View Repository</a>
+</div>
+
+<div class="project">
+  <h2>Advanced Shaders demo</h2>
+  <p>This was the project we worked on during our "Advanced Shader Programming" class.
+    For this class, a game renderer was provided, the goal was to implement modern rendering techniques and shaders.
+  <br>For this, I implemented:<br>
+    <ul>
+      <li>Shadow Mapping</li>
+      <li>Several material and post processing shaders</li>
+      <li>Deferred rendering</li>
+      <li>Noise generation applied to terrain</li>
+      <li>Particles using compute shaders</li>
+      <li>SSBOs</li>
+      <li>Physically Based Rendering</li>
+    </ul>
+    <br>Most of the parameters are modifiable using an ImGUI interface using uniforms<br>
+  </p>
+
+  <video controls autoplay loop muted>
+    <source src="media/Adv Shaders.mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <a href="https://github.com/GAMR3521/coursework-startpoint-Luigionnaire" target="_blank">View Repository</a>
+</div>
+
+  <div class="project">
+    <h2>Witch Hunt</h2>
+    <p>This is a prototype for an online multiplayer ARPG game.
+      Developed using Unreal Engine, "Witch Hunt" was a group project. The purpose of 
+      which was to learn how to utilise C++ efficiently within Unreal Engine,
+      as well as implementing an online multiplayer aspect.
+      <br>I was responsible for:<br>
+      <ul>
+        <li>Player Movement</li>
+        <li>Creating a modular spell system</li>
+        <li>Implementing each team member's code within the project</li>
+      </ul>
+      
+
+    </p>
+    
+    
+    <video controls autoplay loop muted>
+      <source src="media/WitchHunt.mp4">
+      Your browser does not support the video tag.
+    </video>
+    
+    
+    <p>Repository not available</p>
+  </div>
+
+</div>
+<div class="project">
+  <h2>Space Fighter</h2>
+  <p>A very simple spaceship shooter game made for my JavaScript module during the second year of University.
+    The goal was to demonstrate an understanding of the JavaScript language focusing on real time graphics.
+    The inspiration for this project was a PlayStation2 game called "Psyvariar".
+  </p>
+  
+  <a href="https://demadev.co.uk/Space_Fighter" target="_blank">Play this game!</a>
+
+  <video controls autoplay loop muted>
+    <source src="media/spaceFighter.mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <a href="https://github.com/Luigionnaire/Space_Fighter" target="_blank">View Repository</a>
+</div>
+
+
+</body>
+</html>

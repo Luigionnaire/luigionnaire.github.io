@@ -1,0 +1,107 @@
+body {
+font-family: Arial, sans-serif;
+max-width: 800px;
+margin: 0 auto;
+padding: 2em;
+background-color: #f9f9f9;
+}
+
+
+h1 {
+text-align: center;
+}
+
+
+nav {
+text-align: center;
+margin-bottom: 2em;
+}
+
+
+nav a {
+margin: 0 1em;
+text-decoration: none;
+color: #0366d6;
+font-weight: bold;
+}
+
+
+.active {
+text-decoration: underline;
+}
+
+
+.section-title {
+text-align: center;
+margin-top: 3em;
+}
+
+
+.project {
+border: 1px solid #ddd;
+border-radius: 8px;
+background-color: white;
+padding: 1em;
+margin-bottom: 2em;
+}
+
+
+.project img,
+.project video {
+max-width: 100%;
+height: auto;
+border-radius: 4px;
+margin-top: 1em;
+align-items: center;
+}
+
+
+.project a {
+display: inline-block;
+margin-top: 1em;
+text-decoration: none;
+color: #0366d6;
+}
+/* Updated layout for full-left sidebar and improved spacing */
+.layout {
+display: flex;
+margin: 0;
+padding: 0;
+}
+
+
+.sidebar {
+width: 220px;
+padding: 2em 1.5em;
+background-color: #ffffff;
+border-right: 1px solid #ddd;
+position: fixed;
+top: 0;
+left: 0;
+height: 100vh;
+overflow-y: auto;
+}
+
+
+.sidebar a {
+display: block;
+margin-bottom: 1.2em;
+color: #0366d6;
+text-decoration: none;
+font-weight: bold;
+font-size: 1.1em;
+}
+
+
+.sidebar a.active {
+text-decoration: underline;
+}
+
+
+/* Push main content to the right of the sidebar */
+.content {
+flex: 1;
+padding: 20px;
+max-width: none;
+}
+
