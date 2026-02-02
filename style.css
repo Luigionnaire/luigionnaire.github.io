@@ -1,5 +1,5 @@
 body {
-font-family: Arial, sans-serif;
+font-family: Calibri, sans-serif;
 max-width: 800px;
 margin: 0 auto;
 padding: 2em;
@@ -31,11 +31,16 @@ text-decoration: underline;
 }
 
 
-.section-title {
-text-align: center;
-margin-top: 3em;
-}
+/*.section-title {*/
+/*text-align: center;*/
+/*margin-top: 3em;*/
+/*}*/
 
+.section-title {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
 
 .project {
 border: 1px solid #ddd;
@@ -53,6 +58,7 @@ height: auto;
 border-radius: 4px;
 margin-top: 1em;
 align-items: center;
+    display: block;
 }
 
 
@@ -105,3 +111,19 @@ padding: 20px;
 max-width: none;
 }
 
+
+.content-section {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 2em;
+    margin-bottom: 3em;
+}
+
+.content-section ul {
+    padding-left: 1.2em;
+}
+
+.content-section li {
+    margin-bottom: 0.8em;
+}

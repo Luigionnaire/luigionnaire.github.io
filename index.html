@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Games Programming - Luigi De Marco</title>
+  <title>Home - Luigi De Marco</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,7 +12,9 @@
 
   <!-- Sidebar -->
   <nav class="sidebar">
-    <a href="index.html" class="active">Games Programming</a>
+    <a href="index.html" class="active">Home</a>
+    <a href="gamesProgramming.html">Games</a>
+    <a href="graphicsProgramming.html">Graphics Programming</a>
     <a href="translation.html">Translation</a>
   </nav>
 
@@ -20,102 +22,49 @@
   <main class="content">
 
     <h1>Luigi De Marco - Portfolio</h1>
-    <h2 class="section-title">Games Programming</h2>
 
-    <div class="project">
-      <h2>Vulkan Renderer</h2>
-      <p>This was submitted as the final deliverable for the Games Programming university course at DMU Leicester.
-      It is a rendering application which utilises the Vulkan API to render a 3D scene with PBR lighting.
-      <br>The entire project, including build files and dependencies, were made from scratch.<br></p>
-
-      <video controls autoplay loop muted>
-        <source src="media/vulkan_video.mp4">
-      </video>
-
-      <a href="https://github.com/Luigionnaire/VulkanApp" target="_blank">View Repository</a>
-    </div>
-
-    <div class="project">
-      <h2>Asteroid Belt</h2>
-      <p>This was the project we worked on during our "Performant Rendering" class.</p>
-
-      <ul>
-        <li>Entity Component System (ECS)</li>
-        <li>Removed redundant GPU bindings</li>
-        <li>Deferred rendering</li>
-        <li>Level of Detail (LOD) using MeshOptimizer</li>
-        <li>SIMD instructions</li>
-        <li>Broadphase collision detection</li>
-        <li>Instanced rendering</li>
-      </ul>
-
-      <video controls autoplay loop muted>
-        <source src="media/Asteroid belt.mp4">
-      </video>
-
-      <p>Repository not available</p>
-    </div>
-
-    <div class="project">
-      <h2>Advanced Shaders Demo</h2>
-      <p>This was the project we worked on during our "Advanced Shader Programming" class.</p>
-
-      <ul>
-        <li>Shadow Mapping</li>
-        <li>Several material and post processing shaders</li>
-        <li>Deferred rendering</li>
-        <li>Noise generation applied to terrain</li>
-        <li>Particles using compute shaders</li>
-        <li>SSBOs</li>
-        <li>Physically Based Rendering</li>
-      </ul>
-
-      <video controls autoplay loop muted>
-        <source src="media/Adv Shaders.mp4">
-      </video>
-
-      <a href="https://github.com/GAMR3521/coursework-startpoint-Luigionnaire" target="_blank">View Repository</a>
-    </div>
-
-    <div class="project">
-      <h2>Witch Hunt</h2>
-      <p>This is a prototype for an online multiplayer ARPG game.</p>
-
-      <ul>
-        <li>Player Movement</li>
-        <li>Creating a modular spell system</li>
-        <li>Implementing team code</li>
-      </ul>
-
-      <video controls autoplay loop muted>
-        <source src="media/WitchHunt.mp4">
-      </video>
-
-      <p>Repository not available</p>
-    </div>
-
-    <div class="project">
-      <h2>Space Fighter</h2>
-      <p>A simple spaceship shooter made for a JavaScript project
-        Controls:
-        <ul>
-            <li>Arrows - Movement</li>
-            <li>Spacebar - Shoot</li>
-        </ul>
+    <!-- Summary Section -->
+    <section class="content-section" id="summary">
+      <h2 class="section-title">Summary</h2>
+      <p>
+        Hello! Welcome to my website. <br>
+        A little about me:<br>
+        I'm a programmer, developer and cloud practitioner.<br>
+        I grew up in Italy, but moved to the UK in 2020. I'm a First-Class University graduate, and I'm hoping to start
+        a career in tech.<br>
+        The reason this Portfolio has such a simple look is because I've built it from scratch, because I wanted to make something new.
+        This is reflected in my development philosophy: If you're making something, you should know how it works.<br>
+        I'm always interested to hear about new opportunities, so if you would like to work with me, enjoy my projects,
+        or would simply like to have a chat, please don't hesitate to contact me at luigidm@outlook.com
       </p>
+    </section>
 
-      <a href="https://demadev.co.uk/Space_Fighter" target="_blank">Play this game!</a>
+    <!-- Education Section -->
+    <section class="content-section" id="education">
+      <h2 class="section-title">Education</h2>
+      <ul>
+        <li>
+          <strong>Bachelor of Science / Games Programming</strong><br>
+          De Montfort University — 2025
+        </li>
+        <li>
+          <strong>AWS re/Start</strong><br>
+          Primed Talent UK — 2026
+        </li>
+      </ul>
+    </section>
 
-      <video controls autoplay loop muted>
-        <source src="media/spaceFighter.mp4">
-      </video>
-
-      <a href="https://github.com/Luigionnaire/Space_Fighter" target="_blank">View Repository</a>
-    </div>
-
+    <!-- Hobbies & Interests Section -->
+    <section class="content-section" id="hobbies">
+      <h2 class="section-title">Hobbies & Interests</h2>
+      <p>
+        As you can probably guess, I am a big nerd!<br>
+        I love to play computer games, card games and board games with friends.<br>
+        I started my weightlifting journey in 2017 and loved every minute of it.<br>
+        I ride Motorbikes, my current is a classic Honda CB500 from 1998<br>
+      </p>
+    </section>
   </main>
-
 </div>
-
 </body>
 </html>

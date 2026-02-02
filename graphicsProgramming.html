@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graphics Programming - Luigi De Marco</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="layout">
+
+
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <a href="index.html">Home</a>
+            <a href="gamesProgramming.html">Games</a>
+            <a href="graphicsProgramming.html" class="active">Graphics Programming</a>
+            <a href="translation.html">Translation</a>
+        </nav>
+
+        <main class="content">
+
+            <h1>Luigi De Marco - Portfolio</h1>
+            <h2 class="section-title">Graphics Programming</h2>
+
+        <div class="project">
+        <h2>Vulkan Renderer</h2>
+        <p>I submitted this as the final deliverable for the Games Programming university course at DMU Leicester.
+            It is a rendering application which utilises the Vulkan API to render a 3D scene with PBR lighting.
+            <br>The entire project, including build files and dependencies, were made from scratch.<br></p>
+
+        <video controls autoplay loop muted>
+            <source src="media/vulkan_video.mp4">
+        </video>
+
+        <a href="https://github.com/Luigionnaire/VulkanApp" target="_blank">View Repository</a>
+    </div>
+
+    <div class="project">
+        <h2>Asteroid Belt</h2>
+        <p>Starting from a highly unoptimised application,I applied the following techniques
+            in order to drastically increase its performance. Final result showed a 5x improvement in frame
+            time.</p>
+
+        <ul>
+            <li>Entity Component System (ECS)</li>
+            <li>Removed redundant GPU bindings</li>
+            <li>Deferred rendering</li>
+            <li>Level of Detail (LOD) using MeshOptimizer</li>
+            <li>SIMD instructions</li>
+            <li>Broadphase collision detection</li>
+            <li>Instanced rendering</li>
+        </ul>
+
+        <video controls autoplay loop muted>
+            <source src="media/Asteroid belt.mp4">
+        </video>
+
+        <p>Repository not available</p>
+    </div>
+
+    <div class="project">
+        <h2>Advanced Shaders Demo</h2>
+        <p>Starting from a base Rendering application in OpenGL, I learned and implemented the
+            following features.</p>
+
+        <ul>
+            <li>Shadow Mapping</li>
+            <li>Several material and post-processing shaders</li>
+            <li>Deferred rendering</li>
+            <li>Noise generation applied to terrain</li>
+            <li>Particles using compute shaders</li>
+            <li>SSBOs</li>
+            <li>Physically Based Rendering</li>
+        </ul>
+
+        <video controls autoplay loop muted>
+            <source src="media/Adv Shaders.mp4">
+        </video>
+
+        <a href="https://github.com/GAMR3521/coursework-startpoint-Luigionnaire" target="_blank">View Repository</a>
+    </div>
+
+        <div class="project">
+            <h2>Asteroid Belt</h2>
+            <p>A static software raytracer built entirely on JavaScript.
+                Please allow some time to load depending on your hardware.</p>
+
+            <img src="media/raytracer.png" alt="Software Raytracer">
+
+            <a href="rayTracer.html" target = "_blank">Render</a>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
+
