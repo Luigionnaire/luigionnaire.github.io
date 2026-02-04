@@ -127,3 +127,16 @@ max-width: none;
 .content-section li {
     margin-bottom: 0.8em;
 }
+
+pre {
+    background: #1e1e1e;
+    color: #dcdcdc;
+    padding: 1.25rem;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.7rem;
+}

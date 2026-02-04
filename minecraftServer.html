@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Games - Luigi De Marco</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <a href="index.html">Home</a>
+        <a href="minecraftServer.html" class="active">SysOps</a>
+        <a href="gamesProgramming.html">Games</a>
+        <a href="graphicsProgramming.html">Graphics Programming</a>
+        <a href="translation.html">Translation</a>
+
+    </nav>
+    <!-- Main Content -->
+    <main class="content">
+            <h1>Self-Hosting a Minecraft Server (and Accidentally Learning Infrastructure)</h1>
+
+            <p>
+                I want to share a personal project I’ve worked on in my free time that combines a long-time
+                interest (games) with a newer one (infrastructure).
+            </p>
+
+            <p>
+                This wasn’t planned from the start. It sort of evolved as I learned more, broke things,
+                and got advice from people who knew better.
+            </p>
+
+            <p>
+                I love playing videogames, specifically, I love hosting private Minecraft worlds for me and my friends.
+                For years, I used managed game-hosting services, since they didn’t require me to keep my own
+                machine running 24/7 and generally offered decent performance.
+            </p>
+
+            <p>
+                But being the frugal individual that I am, I eventually asked myself:
+                <em>“How can I save money doing this?”</em>
+            </p>
+
+            <p>
+                Most game-hosting providers charge monthly based on RAM (roughly £10/month for ~8 GB).
+                I found that a small server with 8 GB of RAM cost around £110 (pre-AInflation).
+                At that point, I’d technically break even in under a year.
+            </p>
+
+            <p>
+                Of course, electricity isn’t free, and estimating the cost of running a server 24/7 with
+                variable load is difficult. Still, after telling myself <em>“It’s for learning!”</em>,
+                I caved and bought a home server.
+            </p>
+
+            <img src="media/server.png" alt="ThinkCentre server">
+
+            <p>
+                It came with Windows Server preinstalled, which I removed immediately and replaced with
+                Ubuntu Server.
+            </p>
+
+            <h2>First Working Setup</h2>
+
+            <p>
+                To get things running quickly, I used a service called AMP to manage and spin up the
+                Minecraft server. It handled most of the heavy lifting and gave me a web UI to monitor
+                the server.
+            </p>
+
+            <p>
+                Since my home connection doesn’t have a public static IP, I also used a tunneling service
+                playit.gg so my friends could connect without me touching router settings.
+            </p>
+
+            <p>
+                And… it worked.
+            </p>
+
+            <p>
+                No major issues, aside from occasional lag spikes (likely due to the free tunneling service).
+                But I wasn’t satisfied.
+            </p>
+
+            <h2>Why I Rebuilt It</h2>
+
+            <p>A few things bothered me:</p>
+
+            <ul>
+                <li>I didn’t love relying on a “free” tunneling service long-term</li>
+                <li>AMP abstracted away almost everything, so I wasn’t actually learning much</li>
+                <li>I was told (correctly) that I should be using Docker</li>
+            </ul>
+
+            <p>So I decided to:</p>
+
+            <ul>
+                <li>Get rid of AMP</li>
+                <li>Remove the tunneling service</li>
+                <li>Dockerise the Minecraft server</li>
+            </ul>
+
+            <h2>Dockerising the Server</h2>
+
+            <p>
+                Removing AMP wasn’t especially clean; it involved manually stopping and disabling services
+                via <pre><code class="language-bash">systemctl</code></pre> If there’s an easier way, I’m not aware of it.
+            </p>
+
+            <p>
+                After that, I installed Docker and Docker Compose, configured a compose.yaml,
+                and started the server with:
+            </p>
+
+            <pre><code class="language-bash">docker compose up -d</code></pre>
+
+            <p>
+                This gave me much more control, better isolation, and a setup I could actually reason about.
+            </p>
+
+            <h2>Networking and DNS</h2>
+
+            <p>
+                I already owned a domain hosted with Mythic Beasts, which made things easier.
+                I created a subdomain and pointed it at my public IP.
+            </p>
+
+            <p>
+                The problem, of course, is that I don’t have a static IP, so it changes occasionally.
+            </p>
+
+            <p>
+                Thankfully, Mythic Beasts provides an API for dynamically updating DNS records.
+                I used a small Bash script that:
+            </p>
+
+            <ul>
+                <li>Checks the current public IP</li>
+                <li>Compares it to the last known value</li>
+                <li>Updates the DNS record via the API if it changed</li>
+            </ul>
+            <pre><code class="language-bash">#!/usr/bin/env bash
+            HOSTNAME=domain
+            USERNAME=mythic beasts
+            PASSWORD=mythic beasts pwd
+            IPPROVIDER=https://ipv4.wtfismyip.com/text
+
+            IP=`curl -sS $IPPROVIDER` # query Current IP
+
+            function valid_ip()
+            {
+                local  ip=$IP
+                local  stat=1
+
+                if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+                    OIFS=$IFS
+                    IFS='.'
+                    ip=($ip)
+                    IFS=$OIFS
+                    [[ ${ip[0]} -le 255 && ${ip[1]} -le 255 \
+                        && ${ip[2]} -le 255 && ${ip[3]} -le 255 ]]
+                    stat=$?
+                fi
+                return $stat
+            }
+
+            DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+            LOGFILE="$DIR/update-ip.log"
+            IPFILE="$DIR/update-ip.ip"
+            DATE=`date`
+            if ! valid_ip $IP; then
+                echo "Invalid IP address: $IP" >> "$LOGFILE"
+                exit 1
+            fi
+
+            # Check if the IP file exists
+            if [ ! -f "$IPFILE" ]
+                then
+              touch "$IPFILE"
+            fi
+
+            if grep -Fx "$IP" "$IPFILE"; then
+                # code if found
+                echo "$DATE IP is still $IP. Exiting" >> "$LOGFILE"
+                exit 0
+            else
+                echo "$DATE IP has changed to $IP" >> "$LOGFILE"
+                echo "$IP" > "$IPFILE"
+
+
+            curl -X POST https://ipv4.api.mythic-beasts.com/dns/v2/dynamic/$HOSTNAME -d username=$USERNAME -d password=$PASSWORD
+            echo "$DATE updated IP address to $IP" >> "$LOGFILE"
+
+            fi
+
+            exit 0</code></pre>
+            <p>
+                This script runs every 10 minutes via <code>cron</code>.
+            </p>
+
+            <h2>Making It Reachable</h2>
+
+            <p>
+                Even with DNS set up, the server still wasn’t accessible, as home routers block unsolicited
+                inbound traffic by default.
+            </p>
+
+            <p>To fix that, I:</p>
+
+            <ul>
+                <li>Assigned a static private IP to the server</li>
+                <li>Set up port forwarding for Minecraft</li>
+                <li>Set up port forwarding for SSH (for remote access)</li>
+            </ul>
+
+            <p>
+                At that point, my friends could connect using a stable domain name, without tunneling services.
+            </p>
+
+            <h2>Final Notes on Security</h2>
+
+            <p>
+                Access to the Minecraft server is restricted using a whitelist of Microsoft accounts,
+                and SSH access is locked down.
+            </p>
+
+            <p>
+                That said, it’s still theoretically vulnerable to
+                DoS attacks. Because of that, I keep the domain and subdomain private.
+            </p>
+
+            <h2>What I Got Out of This</h2>
+
+            <p>This project gave me hands-on experience with:</p>
+
+            <ul>
+                <li>Linux server administration</li>
+                <li>Docker and Docker Compose</li>
+                <li>DNS and dynamic IP handling</li>
+                <li>Networking</li>
+                <li>Automation</li>
+            </ul>
+    </main>
+
+</div>
+
+</body>
+</html>
