@@ -15,8 +15,10 @@
 
     <!-- Main Content -->
     <main class="content">
-            <h1>Self-Hosting a Minecraft Server (and Accidentally Learning Infrastructure)</h1>
+        <h1 class="section-title">Self-Hosting a Minecraft Server (and Accidentally Learning Infrastructure)</h1>
 
+        <section class="content-section" id="summary">
+            <h2>Summary</h2>
             <p>
                 I want to share a personal project I’ve worked on in my free time that combines a long-time
                 interest (games) with a newer one (infrastructure).
@@ -56,9 +58,10 @@
                 It came with Windows Server preinstalled, which I removed immediately and replaced with
                 Ubuntu Server.
             </p>
+            </section>
 
+            <section class="content-section" id="firstSetup">
             <h2>First Working Setup</h2>
-
             <p>
                 To get things running quickly, I used a service called AMP to manage and spin up the
                 Minecraft server. It handled most of the heavy lifting and gave me a web UI to monitor
@@ -78,7 +81,8 @@
                 No major issues, aside from occasional lag spikes (likely due to the free tunneling service).
                 But I wasn’t satisfied.
             </p>
-
+            </section>
+            <section class="content-section" id="rebuild">
             <h2>Why I Rebuilt It</h2>
 
             <p>A few things bothered me:</p>
@@ -96,7 +100,8 @@
                 <li>Remove the tunneling service</li>
                 <li>Dockerise the Minecraft server</li>
             </ul>
-
+            </section>
+            <section class="content-section" id="docker">
             <h2>Dockerising the Server</h2>
 
             <p>
@@ -114,7 +119,8 @@
             <p>
                 This gave me much more control, better isolation, and a setup I could actually reason about.
             </p>
-
+            </section>
+        <section class="content-section" id="networking">
             <h2>Networking and DNS</h2>
 
             <p>
@@ -192,7 +198,7 @@
 
             exit 0</code></pre>
             <p>
-                This script runs every 10 minutes via <code>cron</code>.
+                This script runs every 10 minutes via cron.
             </p>
 
             <h2>Making It Reachable</h2>
@@ -213,7 +219,8 @@
             <p>
                 At that point, my friends could connect using a stable domain name, without tunneling services.
             </p>
-
+        </section>
+        <section class="content-section" id="security">
             <h2>Final Notes on Security</h2>
 
             <p>
@@ -225,7 +232,8 @@
                 That said, it’s still theoretically vulnerable to
                 DoS attacks. Because of that, I keep the domain and subdomain private.
             </p>
-
+</section>
+        <section class="content-section" id="conclusion">
             <h2>What I Got Out of This</h2>
 
             <p>This project gave me hands-on experience with:</p>
@@ -237,6 +245,7 @@
                 <li>Networking</li>
                 <li>Automation</li>
             </ul>
+        </section>
     </main>
 
 </div>
