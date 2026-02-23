@@ -1,142 +1,208 @@
+/* Base Styles */
 body {
-font-family: Calibri, sans-serif;
-max-width: 800px;
-margin: 0 auto;
-padding: 2em;
-background-color: #f9f9f9;
+    font-family: Calibri, sans-serif;
+    max-width: 100%; /* allow full width on mobile */
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    font-size: 1rem;
+    line-height: 1.5;
 }
-
 
 h1 {
-text-align: center;
+    text-align: center;
+    font-size: 2rem;
 }
-
 
 nav {
-text-align: center;
-margin-bottom: 2em;
+    text-align: center;
+    margin-bottom: 2rem;
 }
-
 
 nav a {
-margin: 0 1em;
-text-decoration: none;
-color: #0366d6;
-font-weight: bold;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    color: #0366d6;
+    font-weight: bold;
+    font-size: 1rem;
 }
-
 
 .active {
-text-decoration: underline;
+    text-decoration: underline;
 }
-
-
-/*.section-title {*/
-/*text-align: center;*/
-/*margin-top: 3em;*/
-/*}*/
 
 .section-title {
     text-align: center;
     margin-top: 0;
-    margin-bottom: 1.5em;
+    margin-bottom: 1.5rem;
 }
 
 .project {
-border: 1px solid #ddd;
-border-radius: 8px;
-background-color: white;
-padding: 1em;
-margin-bottom: 2em;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 2rem;
 }
-
 
 .project img,
 .project video {
-max-width: 100%;
-height: auto;
-border-radius: 4px;
-margin-top: 1em;
-align-items: center;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+    margin-top: 1rem;
     display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 
 .project a {
-display: inline-block;
-margin-top: 1em;
-text-decoration: none;
-color: #0366d6;
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: #0366d6;
 }
-/* Updated layout for full-left sidebar and improved spacing */
+
+/* Layout */
 .layout {
-display: flex;
-margin: 0;
-padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
 }
 
-
+/* Sidebar */
 .sidebar {
-width: 220px;
-padding: 2em 1.5em;
-background-color: #ffffff;
-border-right: 1px solid #ddd;
-position: fixed;
-top: 0;
-left: 0;
-height: 100vh;
-overflow-y: auto;
+    width: 220px;
+    padding: 2rem 1rem;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    transition: transform 0.3s ease, width 0.3s ease;
+    font-size: 1.1rem;
 }
 
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+#navToggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
 .sidebar a {
-display: block;
-margin-bottom: 1.2em;
-color: #0366d6;
-text-decoration: none;
-font-weight: bold;
-font-size: 1.1em;
+    display: block;
+    margin-bottom: 1rem;
+    color: #0366d6;
+    text-decoration: none;
+    font-weight: bold;
 }
-
 
 .sidebar a.active {
-text-decoration: underline;
+    text-decoration: underline;
 }
 
-
-/* Push main content to the right of the sidebar */
+/* Content */
 .content {
-flex: 1;
-padding: 20px;
-max-width: none;
+    flex: 1;
+    margin-left: 220px;
+    padding: 1.5rem;
 }
-
 
 .content-section {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 2em;
-    margin-bottom: 3em;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .content-section ul {
-    padding-left: 1.2em;
+    padding-left: 1.2rem;
 }
 
 .content-section li {
-    margin-bottom: 0.8em;
+    margin-bottom: 0.8rem;
 }
 
 pre {
     background: #1e1e1e;
     color: #dcdcdc;
-    padding: 1.25rem;
-    border-radius: 6px;
+    padding: 1rem;
+    border-radius: 0.5rem;
     overflow-x: auto;
+    font-size: 0.85rem;
 }
 
 code {
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+}
+
+/* ========================
+   Responsive Adjustments
+======================== */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 180px;
+        padding: 1.5rem 0.75rem;
+        font-size: 1rem;
+    }
+
+    .content {
+        margin-left: 180px;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    /* Collapse sidebar by default */
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 999;
+        width: 70vw;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    #navToggle {
+        font-size: 2.2rem;
+        top: 0.8rem;
+        left: 0.8rem;
+    }
+}
+
+@media (max-width: 500px) {
+    body {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .content-section {
+        padding: 1rem;
+    }
+
+    nav a {
+        font-size: 0.95rem;
+        margin: 0 0.3rem;
+    }
 }
