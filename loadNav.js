@@ -1,5 +1,5 @@
 // loadNav.js
-fetch("nav.inc.html")
+fetch("/partials/nav.html")
     .then(res => res.text())
     .then(html => {
         document.getElementById("sidebar").innerHTML = html;
