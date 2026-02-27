@@ -19,3 +19,13 @@ jobs:
         blacklist: partials
         css: true
         format: text
+
+  link-checker:
+    name: "Link Checker"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check links
+        uses: untitaker/hyperlink@0.2.0
+        with:
+          args: public/ --sources src/
