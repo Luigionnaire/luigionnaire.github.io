@@ -28,3 +28,18 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           args: . --exclude-path partials/
+
+  deploy-to-server:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@v8
+      with:
+        switches: -avzr --delete
+        path: .
+        remote_path: ${{ secrets.REMOTE_PATH }}
+        remote_host: ${{ secrets.REMOTE_HOST }} 
+        remote_port: ${{ secrets.REMOTE_PORT }} 
+        remote_user: ${{ secrets.REMOTE_USER }} 
+        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
