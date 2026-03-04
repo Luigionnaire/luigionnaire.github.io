@@ -38,6 +38,7 @@ jobs:
       with:
         switches: -avzr --delete
         path: .
+        debug: true
         remote_path: ${{ secrets.REMOTE_PATH }}
         remote_host: ${{ secrets.REMOTE_HOST }} 
         remote_port: ${{ secrets.REMOTE_PORT }} 
