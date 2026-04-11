@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SysOps - Luigi De Marco</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <div id="sidebar"></div>
+    <script src="loadNav.js"></script>
+
+    <!-- Main Content -->
+    <main class="content">
+        <h1 class="section-title">Creating a CI/CD pipeline for this Website</h1>
+
+        <section class="content-section" id="summary">
+            <h2>Intro</h2>
+            <p>As I kept adding projects to my portfolio and thus expanding this website,
+            it was starting to get a bit overwhelming to manually check that every link worked,
+            and that the pages looked good on both mobile and PC.
+            Not to mention the fact that I didn't have an intermediate step between commiting to
+            a change and that change reflecting on the live website.</p>
+
+            <p>So, I was suddenly aware of the lack of an actual development pipeline...
+            But, every problem is an opportunity to learn, an experienced DevOps Engineer
+            suggested I use GitHub Actions to set up a CI/CD pipeline to streamline the process.</p>
+
+        </section>
+
+        <section class="content-section" id="plan">
+            <h2>Planning</h2>
+            <p>Before this, I am not afraid to admit that my development pipeline consisted of:
+            </p>
+            <ol>
+                <li>Make changes to the website</li>
+                <li>Run it locally on my machine</li>
+                <li>Push it to the repository</li>
+                <li>Pray that the pages look fine on mobile</li>
+            </ol>
+
+            <p>And this was all working on the main branch...
+                 I'll move forward by blaming my university professors for not teaching us how to use
+                GitHub properly for that one.
+            </p>
+
+            <p>It was inadequate to say the least. At its best, it was a poorly thought-out,
+                disorganised process, and at worst, I was displaying half-baked, broken or
+                even unresponsive webpages to potential employers.
+
+            <br><br>So I came up with this workflow:
+            </p>
+            <img src="media/cicdDiagram.png" alt="CI/CD pipeline diagram">
+
+            <p>Since I am using GitHub pages, the deploying bit is already taken care of.
+                So the next steps are to:
+            </p>
+            <ul>
+                <li>Setup testing environment on my local server</li>
+                <li>Setup tests to run every time there is a change</li>
+                <li>Automate pushing of changes to the local server</li>
+            </ul>
+
+
+        </section>
+        <section class="content-section" id="Tests">
+            <h2>Tests</h2>
+            <p>For a simple website such as this, there are a couple of
+             tests that would be a good idea to run.</p>
+            <h3>HTML validator</h3>
+            <a href="https://github.com/marketplace/actions/html5-validator" target="_blank" rel="noopener noreferrer">https://github.com/marketplace/actions/html5-validator</a>
+            <p>html5validator is a command line tool that tests files for HTML5 validity.<br>
+                Running it in this pipeline ensures that HTML is automatically checked for
+                errors before deployment.<br>
+                It helps catch issues like invalid tags
+                or incorrect structure early, improving browser compatibility,
+                and overall code quality.
+            </p>
+            <h3>Link Checker</h3>
+            <a href="https://github.com/marketplace/actions/lychee-broken-link-checker" target="_blank" rel="noopener noreferrer">https://github.com/marketplace/actions/lychee-broken-link-checker</a>
+            <p>Lychee automatically checks for broken links across the website. This helps ensure that all internal
+                and external links remain valid, preventing users from encountering dead pages and maintaining reliability.
+            </p>
+            <p>Other tests could be linters for CSS or JS, but I didn't deem it necessary for my case, since I have no plans
+            to work on JavaScript, and the CSS file rarely gets modified.</p>
+
+        </section>
+
+        <section class="content-section" id="internal server">
+            <h2>Setting up the Internal Server</h2>
+            <p>If you have seen the SysOps section of this website, you'll know I own an Ubuntu Server
+            which I connect to using ssh.</p>
+            <p>The software I've chosen to host this test webpage with is Nginx, for no particular reason
+            other than I was already familiar with it.</p>
+            <p>The process was not particularly straightforward.<br>
+            Nginx's system is based on two folders usually located in etc/nginx/</p>
+        </section>
+        <section class="content-section" id="networking">
+        </section>
+        <section class="content-section" id="security">
+            <h2></h2>
+        </section>
+        <section class="content-section" id="conclusion">
+            <h2></h2>
+
+        </section>
+    </main>
+
+</div>
+
+</body>
+</html>
