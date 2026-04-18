@@ -89,15 +89,21 @@
 
         </section>
 
-        <section class="content-section" id="internal server">
+        <section class="content-section" id="internal-server">
             <h2>Setting up the Internal Server</h2>
             <p>If you have seen the SysOps section of this website, you'll know I own an Ubuntu Server
             which I connect to using ssh.</p>
+            <p>To ensure the new webpages displayed correctly on other devices other than the
+                one I'm coding with, I use this machine to serve the version of the website I am currently
+                 working on, but it is available only on my local network.</p>
             <p>The software I've chosen to host this test webpage with is Nginx, for no particular reason
             other than I was already familiar with it.</p>
             <p>The process was not particularly straightforward.<br>
-            Nginx's system is based on two folders usually located in etc/nginx/</p>
-        </section>
+            Nginx's system is based on two folders usually located in etc/nginx/{sites-available, sites-enabled}</p>
+            <p>In sites-available folder, you must create a configuration file, which then should be symlinked to
+             the sites-enabled folder, if an available site is NOT symlinked in the sites-enabled folder, it will not be run..</p>
+            
+            </section>
         <section class="content-section" id="networking">
         </section>
         <section class="content-section" id="security">
