@@ -61,7 +61,7 @@
             <ul>
                 <li>Setup testing environment on my local server</li>
                 <li>Setup tests to run every time there is a change</li>
-                <li>Automate pushing of changes to the local server</li>
+                <li>Automate pushing of changes to a local server</li>
             </ul>
 
 
@@ -102,9 +102,14 @@
             Nginx's system is based on two folders usually located in etc/nginx/{sites-available, sites-enabled}</p>
             <p>In sites-available folder, you must create a configuration file, which then should be symlinked to
              the sites-enabled folder, if an available site is NOT symlinked in the sites-enabled folder, it will not be run..</p>
-            
             </section>
-        <section class="content-section" id="networking">
+        <section class="content-section" id="server-workflow">
+            <h2>Internal Server Workflow</h2>
+            <p>Now that the machine is able and ready to host the webpage, the next step is to
+                have a way to pull from the repository as and when it's needed.</p>
+            <p>Conveniently, there is a GitHub action that can be used for this purpose: 
+                rsync <a href="https://github.com/marketplace/actions/rsync-deployments-action" target="_blank" rel="noopener noreferrer">https://github.com/marketplace/actions/rsync-deployments-action</a>
+            </p>
         </section>
         <section class="content-section" id="security">
             <h2></h2>
