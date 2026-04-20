@@ -125,19 +125,20 @@
                 <p>In this pipeline, rsync is used to automatically push the latest version of the website
                 from the repository to the internal server whenever changes are made. It connects over SSH,
                 copies updated files, and ensures the server always reflects the most recent state of the project.</p>
-                <h3>Chroot</h3>
+                
+                <h3>Chroot jail</h3>
                 <p>Since handing ssh access to github actions would mean exposing the entire machine to a service I do not personally manage, I followed this guide:
                 <a href="https://www.tecmint.com/restrict-ssh-user-to-directory-using-chrooted-jail/" target="_blank" rel="noopener noreferrer"> https://www.tecmint.com/restrict-ssh-user-to-directory-using-chrooted-jail/</a>
                    
-                which explains how to restrict ssh users to a specific directory and commands
+                which explains how to restrict ssh users to a specific directory and commands.
 
-                The important difference between this guide and what I did, was the addition of the /bin/rsync files, as the github action requires it.
+                The important difference between this guide and what I did, was the addition of the /bin/rsync files, as the github action requires it.</p>
 
                 <pre><code>cp --parents `ldd &lt;BIN_PATH&gt; | cut -d " " -f 3` &lt;CHROOT_PATH&gt;</code></pre>
-                is a helpful command to copy library dependencies for the chroot, but it’s best to use caution and double-check every instance.
-
+                <p>This is a helpful command to copy library dependencies for the chroot, but it’s best to use caution and double-check every instance.
                 The user specified in this chroot will also be the user specified in the Github Secrets, thus the user that will be used by rsync</p>
-
+                <p>This setup ensures that the deployment user is confined to a restricted environment,
+                reducing the impact of potential security breaches.</p>
             </section>
 
         <section class="content-section" id="Workflow">
