@@ -54,7 +54,10 @@
             <br><br>So I came up with this workflow:
             </p>
             <img src="media/cicdDiagram.png" alt="CI/CD pipeline diagram">
-
+            <p>This diagram shows the workflow from development to deployment.
+                Changes are validated through automated tests before being deployed, then sent
+                to a local staging server, where I can ensure reliability on multiple devices
+                before reaching production.</p>
             <p>Since I am using GitHub pages, the deploying bit is already taken care of.
                 So the next steps are to:
             </p>
@@ -107,16 +110,106 @@
             <h2>Internal Server Workflow</h2>
             <p>Now that the machine is able and ready to host the webpage, the next step is to
                 have a way to pull from the repository as and when it's needed.</p>
-            <p>Conveniently, there is a GitHub action that can be used for this purpose: 
-                rsync <a href="https://github.com/marketplace/actions/rsync-deployments-action" target="_blank" rel="noopener noreferrer">https://github.com/marketplace/actions/rsync-deployments-action</a>
+            <p>Conveniently, there is a GitHub action that can be used for this purpose. 
             </p>
-        </section>
-        <section class="content-section" id="security">
-            <h2></h2>
+                <h3>rsync</h3>
+                <a href="https://github.com/marketplace/actions/rsync-deployments-action" target="_blank" rel="noopener noreferrer">https://github.com/marketplace/actions/rsync-deployments-action</a>
+                <p><strong>rsync</strong> (remote sync) is a fast and efficient file transfer tool used to
+                synchronize files between two locations. In this case, the GitHub repository and my internal server.</p>
+
+                <p>Unlike a simple copy operation, rsync only transfers the differences between files.
+                This means that instead of re-uploading the entire website every time a change is made,
+                it will only update the files that were modified. This makes deployments significantly
+                faster and reduces unnecessary network usage.</p>
+
+                <p>In this pipeline, rsync is used to automatically push the latest version of the website
+                from the repository to the internal server whenever changes are made. It connects over SSH,
+                copies updated files, and ensures the server always reflects the most recent state of the project.</p>
+                <h3>Chroot</h3>
+                <p>Since handing ssh access to github actions would mean exposing the entire machine to a service I do not personally manage, I followed this guide:
+                <a href="https://www.tecmint.com/restrict-ssh-user-to-directory-using-chrooted-jail/" target="_blank" rel="noopener noreferrer"> https://www.tecmint.com/restrict-ssh-user-to-directory-using-chrooted-jail/</a>
+                   
+                which explains how to restrict ssh users to a specific directory and commands
+
+                The important difference between this guide and what I did, was the addition of the /bin/rsync files, as the github action requires it.
+
+                <pre><code>cp --parents `ldd &lt;BIN_PATH&gt; | cut -d " " -f 3` &lt;CHROOT_PATH&gt;</code></pre>
+                is a helpful command to copy library dependencies for the chroot, but it’s best to use caution and double-check every instance.
+
+                The user specified in this chroot will also be the user specified in the Github Secrets, thus the user that will be used by rsync</p>
+
+            </section>
+
+        <section class="content-section" id="Workflow">
+            <h2>Workflow</h2>
+            <p>This is the finalised YAML file.</p>
+            <pre><code>name: Pull Request tests
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+jobs:
+  build:
+    name: "HTML validation"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checks HTML5
+      uses: Cyb3r-Jak3/html5validator-action@master
+      with:
+        root: .
+        blacklist: partials
+        css: true
+        format: text
+
+  link-checker:
+    name: "Link Checker"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: . --exclude-path partials/
+
+  deploy-to-server:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@v8
+      with:
+        switches: -avzr --delete
+        path: .
+        remote_path: ${{ secrets.REMOTE_PATH }}
+        remote_host: ${{ secrets.REMOTE_HOST }} 
+        remote_port: ${{ secrets.REMOTE_PORT }} 
+        remote_user: ${{ secrets.REMOTE_USER }} 
+        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}</code></pre>
+        <p>All changes are made through feature branches and submitted via pull requests.
+        This ensures that validation checks are always performed before merging into the main branch.</p>
+        <p>This workflow is triggered on pull requests and consists of three stages:</p>
+        <ul>
+        <li><strong>Validation:</strong> HTML is checked for correctness</li>
+        <li><strong>Link checking:</strong> Ensures no broken links exist</li>
+        <li><strong>Staging:</strong> Uses rsync to update the internal server</li>
+        </ul>
+        <p>Deployment is handled by GitHub pages automatically, once the pull request is validated</p>
         </section>
         <section class="content-section" id="conclusion">
-            <h2></h2>
+            <h2>Conclusion</h2>
+            <p>This project transformed a manual and error-prone workflow into a structured,
+            automated pipeline. It improved reliability, reduced deployment risk, and taught me
+            best practices that can scale to larger projects.</p>
 
+        <ul>
+            <li>Automated validation of HTML and links on every pull request</li>
+            <li>Eliminated broken pages reaching production</li>
+            <li>Reduced deployment time through incremental updates (rsync)</li>
+            <li>Introduced a safe testing environment before public release</li>
+        </ul>
         </section>
     </main>
 
