@@ -2,69 +2,195 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home - Luigi De Marco</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="layout">
-
-
-  <div id="sidebar"></div>
-  <script src="loadNav.js"></script>
-
-
-  <!-- Main Content -->
-  <main class="content">
-
-    <h1>Luigi De Marco - Portfolio</h1>
-
-    <!-- Summary Section -->
-    <section class="content-section" id="summary">
-      <h2>Summary</h2>
-      <p>
-        Hello! Welcome to my website. <br>
-        A little about me:<br>
-        I'm a programmer, developer and certified cloud practitioner.<br>
-        I grew up in Italy, but moved to the UK in 2020. I graduated from University in 2025.<br>
-        I'm building this website from scratch! That's why it looks so basic, also I'm a terrible designer.<br>
-        I'm always interested to hear about new opportunities, so if you would like to work with me, enjoy my projects,
-        or would simply like to have a chat, please don't hesitate to contact me at luigidm@outlook.com
-      </p>
-    </section>
-
-    <!-- Education Section -->
-    <section class="content-section" id="education">
-      <h2>Education</h2>
-      <ul>
-        <li>
-          <strong>Bachelor of Science / Computer Games Programming</strong><br>
-          De Montfort University — 2025
-        </li>
-        <li>
-          <strong>AWS re/Start</strong><br>
-          Primed Talent UK — 2026
-        </li>
+<div id="sidebar">
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html"><span class="nav-monogram">LD</span><span>Luigi De Marco</span></a>
+      <button id="navToggle" class="nav-toggle" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="index.html#work">Projects</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#about">About</a></li>
       </ul>
+      <div class="nav-social" aria-label="Social links">
+        <a class="icon-link" href="https://github.com/Luigionnaire" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.03c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a class="icon-link" href="https://www.linkedin.com/in/luigi-de-marco-072406282" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        <button class="icon-link email-copy" type="button" aria-label="Copy email address" title="Copy email address">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.4l10 6.25L22 6.4V6H2zm20 2.75-9.47 5.92a1 1 0 0 1-1.06 0L2 8.75V18h20V8.75z"/></svg>
+        </button>
+      </div>
+      <span id="copyStatus" class="copy-status" role="status" aria-live="polite"></span>
+    </div>
+  </nav>
+</div>
+
+<div class="layout">
+  <script src="loadNav.js"></script>
+  <main id="main" class="content">
+
+    <header class="hero">
+      <div class="hero-copy">
+        <h1>Luigi De Marco</h1>
+        <p class="eyebrow">Computer Games Graduate &amp; Software Developer</p>
+        <p class="hero-lede">
+          I build real-time graphics applications, game prototypes, and infrastructure.
+          My work spans across C++, Vulkan, Linux administration, and automation.
+        </p>
+        <div class="hero-feature-links">
+          <a class="button button-primary" href="graphicsProgramming.html">Graphics programming</a>
+          <a class="button button-secondary" href="infrastructure.html">Infrastructure</a>
+          <a class="button button-secondary" href="gamesProgramming.html">Games programming</a>
+        </div>
+        <p class="hero-status">I'm open to Programming, Development, Infrastructure and Cloud based roles</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">Explore my work</a>
+          <a class="button button-secondary" href="mailto:luigidm@outlook.com">Get in touch</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="work">
+      <div class="section-head">
+        <h2>Selected work</h2>
+      </div>
+
+      <div class="card-grid card-grid-featured">
+        <a class="project-card" href="vulkanRenderer.html">
+          <div class="card-media"><video muted loop preload="metadata" autoplay><source src="media/vulkan_video.mp4" type="video/mp4"></video></div>
+          <div class="card-body">
+            <h3>Vulkan Renderer</h3>
+            <p>Real-time 3D renderer built with Vulkan and C++, featuring PBR lighting and a from-scratch build setup.</p>
+            <ul class="chips"><li>Vulkan</li><li>C++</li><li>PBR</li></ul>
+            <span class="card-meta">Solo · University final project</span>
+          </div>
+        </a>
+
+        <a class="project-card" href="minecraftServer.html">
+          <div class="card-media"><img src="media/server.png" alt="ThinkCentre home server"></div>
+          <div class="card-body">
+            <h3>Self-hosted Minecraft Infrastructure</h3>
+            <p>A Dockerised server with dynamic DNS, SSH hardening, port forwarding, and automated public IP updates.</p>
+            <ul class="chips"><li>Linux</li><li>Docker</li><li>Networking</li></ul>
+            <span class="card-meta">Solo · Personal infrastructure project</span>
+          </div>
+        </a>
+
+        <a class="project-card" href="cicd.html">
+          <div class="card-media"><img src="media/cicdDiagram.png" alt="CI/CD pipeline diagram"></div>
+          <div class="card-body">
+            <h3>Portfolio CI/CD Pipeline</h3>
+            <p>Automated HTML validation, broken-link checks, staging deployment, and rsync delivery through GitHub Actions.</p>
+            <ul class="chips"><li>GitHub Actions</li><li>rsync</li><li>Nginx</li></ul>
+            <span class="card-meta">Solo · DevOps project</span>
+          </div>
+        </a>
+
+        <a class="project-card" href="asteroidBelt.html">
+          <div class="card-media"><video muted loop preload="metadata" autoplay><source src="media/AsteroidBelt.mp4" type="video/mp4"></video></div>
+          <div class="card-body">
+            <h3>Asteroid Belt Optimisation</h3>
+            <p>Performance engineering using ECS, deferred rendering, LOD, SIMD, instancing, and collision broadphase techniques.</p>
+            <ul class="chips"><li>OpenGL</li><li>C++</li><li>SIMD</li></ul>
+            <span class="card-meta">Solo · 5x frame-time improvement</span>
+          </div>
+        </a>
+      </div>
+
+      <h3 class="section-sub">Games &amp; other projects</h3>
+      <div class="card-grid">
+        <a class="project-card" href="witchHunt.html">
+          <div class="card-media"><video muted loop preload="metadata" autoplay><source src="media/WitchHunt.mp4" type="video/mp4"></video></div>
+          <div class="card-body"><h3>Witch Hunt</h3><p>Prototype multiplayer ARPG with player movement, modular spells, and team systems.</p><ul class="chips"><li>Game systems</li><li>Networking</li></ul><span class="card-meta">Solo · Game prototype</span></div>
+        </a>
+        <a class="project-card" href="spaceFighter.html">
+          <div class="card-media"><video muted loop preload="metadata" autoplay><source src="media/spaceFighter.mp4" type="video/mp4"></video></div>
+          <div class="card-body"><h3>Space Fighter</h3><p>A browser-based JavaScript spaceship shooter with movement and projectile controls.</p><ul class="chips"><li>JavaScript</li><li>HTML Canvas</li></ul><span class="card-meta">Solo · Browser game</span></div>
+        </a>
+        <a class="project-card" href="translation.html">
+          <div class="card-media"><img src="media/Luxe.png" alt="Luxe Shopify theme"></div>
+          <div class="card-body"><h3>Italian Shopify Localisation</h3><p>Full localisation for the Luxe theme, supported by Python text-extraction tooling.</p><ul class="chips"><li>Localisation</li><li>Python</li></ul><span class="card-meta">Freelance · Shopify</span></div>
+        </a>
+        <a class="project-card" href="advancedShaders.html">
+          <div class="card-media"><video muted loop preload="metadata" autoplay><source src="media/AdvShaders.mp4" type="video/mp4"></video></div>
+          <div class="card-body"><h3>Advanced Shaders Demo</h3><p>An OpenGL rendering project exploring deferred rendering, shadow mapping, compute particles, terrain noise, and PBR.</p><ul class="chips"><li>OpenGL</li><li>GLSL</li><li>Compute shaders</li></ul><span class="card-meta">Solo · Graphics programming</span></div>
+        </a>
+        <a class="project-card" href="rayTracer.html">
+          <div class="card-media"><img src="media/raytracer.png" alt="Output from the JavaScript software ray tracer"></div>
+          <div class="card-body"><h3>Software Ray Tracer</h3><p>A from-scratch JavaScript renderer implementing sphere intersections, lighting, shadows, and reflections in the browser.</p><ul class="chips"><li>JavaScript</li><li>Canvas</li><li>Ray tracing</li></ul><span class="card-meta">Solo · Graphics programming</span></div>
+        </a>
+      </div>
     </section>
 
-    <!-- Hobbies & Interests Section -->
-    <section class="content-section" id="hobbies">
-      <h2>Hobbies & Interests</h2>
-      <p>
-        Computer games, card games and board games.<br>
-        I started weightlifting in 2017 and have recently started practicing Martial Arts<br>
-        I ride Motorbikes, my current is a 1998 Honda CB500.<br>
-      </p>
+    <section class="section" id="skills">
+      <div class="section-head">
+        <h2>Skills</h2>
+        <p>Technologies, APIs, tools, and techniques represented in my projects.</p>
+      </div>
+      <div class="skills-grid">
+        <section class="skill-group">
+          <h3>Languages</h3>
+          <ul class="skill-tags">
+            <li>C++</li><li>JavaScript</li><li>Python</li><li>Bash</li><li>GLSL</li>
+          </ul>
+        </section>
+        <section class="skill-group">
+          <h3>Graphics APIs &amp; techniques</h3>
+          <ul class="skill-tags">
+            <li>Vulkan</li><li>OpenGL</li><li>Canvas 2D API</li><li>PBR</li>
+            <li>Deferred rendering</li><li>Shadow mapping</li><li>Compute shaders</li>
+            <li>SSBOs</li><li>Ray tracing</li><li>SIMD</li><li>Instanced rendering</li>
+            <li>Level of Detail</li><li>Entity Component System</li>
+          </ul>
+        </section>
+        <section class="skill-group">
+          <h3>Libraries &amp; development tools</h3>
+          <ul class="skill-tags">
+            <li>MeshOptimizer</li><li>Docker</li><li>Docker Compose</li><li>Git</li>
+            <li>GitHub Actions</li><li>HTML5 Validator</li><li>Lychee</li><li>rsync</li>
+            <li>Nginx</li><li>SSH</li><li>cron</li><li>systemd</li>
+          </ul>
+        </section>
+        <section class="skill-group">
+          <h3>Platforms, services &amp; networking</h3>
+          <ul class="skill-tags">
+            <li>Linux</li><li>Ubuntu Server</li><li>AWS</li><li>GitHub Pages</li>
+            <li>DNS</li><li>Mythic Beasts DNS API</li><li>Port forwarding</li>
+            <li>Shopify themes</li><li>Browser applications</li>
+          </ul>
+        </section>
+        <section class="skill-group">
+          <h3>Game engines</h3>
+          <ul class="skill-tags">
+            <li>Unreal Engine</li><li>Unity</li>
+          </ul>
+        </section>
+      </div>
+      <div class="badge-area">
+        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="45c379f3-979b-4fa1-9d25-53e10f2ae8d1" data-share-badge-host="https://www.credly.com"></div>
+      </div>
     </section>
-    
-    <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="45c379f3-979b-4fa1-9d25-53e10f2ae8d1"
-    data-share-badge-host="https://www.credly.com"></div>
-    <script type="text/javascript" async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
+
+    <section class="section" id="about">
+      <div class="section-head"><h2>About</h2></div>
+      <div class="about-grid">
+        <div><h3>Education</h3><p><strong>BSc Computer Games Programming</strong><br>De Montfort University — 2025</p><p><strong>AWS re/Start</strong><br>Primed Talent UK — 2026</p></div>
+        <div><h3>Interests</h3><p>Computer games, martial arts, weightlifting, motorbikes, and continuously learning new technical skills.</p></div>
+      </div>
+    </section>
 
   </main>
 </div>
 
-
+<script type="text/javascript" async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
 </body>
 </html>

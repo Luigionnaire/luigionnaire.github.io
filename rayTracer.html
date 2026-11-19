@@ -2,303 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ray Tracer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Software Ray Tracer - Luigi De Marco</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-
-<canvas id="canvas" width="400" height="300" style="border:1px solid#000000;">
-Your browser does not support the HTML canvas tag.
-</canvas>
-<script>
-
-
-// Simple vector in 3D with numbers for x, y and z
-class Vec3
-{
-    constructor (x, y, z)
-    {
-        this.x = x
-        this.y = y
-        this.z = z
-    }
-
-    // Add other vector to this one and return the result
-    add(other)
-    {
-        return new Vec3(this.x + other.x, this.y + other.y, this.z + other.z)
-    }
-
-    // Subtract other vector from this one and return the result
-    minus(other)
-    {
-        return new Vec3(this.x - other.x, this.y - other.y, this.z - other.z)
-    }
-
-    // Multiply other vector by this one and return the result
-    multiply(other)
-    {
-        const x = (this.y * other.z) - (this.z * other.y)
-        const y = (this.z * other.x) - (this.x * other.z)
-        const z = (this.x * other.y) - (this.y * other.x)
-
-        return new Vec3(x, y, z)
-    }
-
-    // Scale this vector by the number scalar and return the result
-    scale(scalar)
-    {
-        return new Vec3(this.x * scalar, this.y * scalar, this.z * scalar)
-    }
-    
-    // Calculate the dot product of this vector with the other and return the result
-    dot(other) 
-    {
-        return (this.x * other.x) + (this.y * other.y) + (this.z * other.z)
-    }
-
-    // Calculate and return the magnitude of this vector
-    magnitude() 
-    {
-        return Math.sqrt(this.magnitudeSquared())
-    }
-    
-    // Calculate and return the magnitude of this vector without the square root
-    magnitudeSquared() 
-    {
-        let x = Math.pow(this.x , 2)
-        let y = Math.pow(this.y , 2)
-        let z = Math.pow(this.z , 2)
-        return x + y + z
-    }
-
-    // Return a normalised version of this vector
-    normalised() 
-    {
-        let invMagnitude = 1 / this.magnitude()
-        return new Vec3(this.x * invMagnitude, this.y * invMagnitude, this.z * invMagnitude)
-    }
-}
-
-
-// A sphere in 3D space. Has centre, radius and colour all of which are Vec3s
-class Sphere
-{
-    constructor (centre, radius, colour)
-    {
-        this.centre = centre
-        this.radius = radius
-        this.colour = colour
-    }
-
-    // Calculate the point on the sphere  where the ray intersects using 
-    // a quadratic equation and return the t value of the ray for that point
-    // If two solutions exist return the minus solution
-    // If no solutions exist return -1
-    rayIntersects(ray) 
-    {
-        let t = -1
-        let o_c = ray.origin.minus(this.centre)
-        let a = ray.direction.dot(ray.direction)
-        let b = ray.direction.scale(2).dot(o_c)
-        let c = o_c.dot(o_c)-(this.radius**2)
-        let det = b**2 - 4*(a*c)
-        if (det >= 0){
-            t = (-b - Math.sqrt(det))/(2*a)
-        }
-        return t
-    }
-}
-
-// Ray which has an origin and direction, both are Vec3s
-class Ray
-{
-    constructor (origin, direction)
-    {
-        this.origin = origin
-        this.direction = direction
-    }
-
-    // Calculate and return the point in space (a Vec3) for this ray for the given value of t
-    pointAt(t) 
-    {   
-        let result = this.origin.add(this.direction.scale(t))
-        return result
-    }
-}
-
-// The result of casting a ray into our scene
-// Position is the point where the ray intersects a sphere in the scene
-// Normal is the normal unit vector of the sphere at the intersection point
-// t is the t value along the ray where the intersection point is.  This value should, be -1 when the ray hits nothing
-// SphereIndex is the array index of the sphere hit by the ray
-class RayCastResult
-{
-    constructor(position, normal, t, sphereIndex)
-    {
-        this.position = position
-        this.normal = normal
-        this.t = t
-        this.sphereIndex = sphereIndex
-    }
-}
-// Calculate the intersection point and normal when a ray hits a sphere. Returns a RayCastResult.
-function hit(ray, t, sphereIndex) 
-{
-    let intersectionPoint = ray.pointAt(t)
-    let intersectionNormal = intersectionPoint.minus(spheres[sphereIndex].centre).normalised()
-    return new RayCastResult(intersectionPoint, intersectionNormal, t, sphereIndex)
-}
-
-// Return a RayCastResult when a ray misses everything in the scene
-function miss()
-{
-    return new RayCastResult(new Vec3(0,0,0), new Vec3(0,0,0), -1, -1)
-}
-
-// Check whether a ray hits anything in the scene and return a RayCast Result
-function traceRay(ray)
-{
-    let t = 1000000
-    let closestSphereIndex = -1
-
-    for(let i = 0; i < spheres.length; i++)
-    {
-        let current_t = spheres[i].rayIntersects(ray)
-        if (current_t > 0 && current_t < t)
-        {
-            t = current_t
-            closestSphereIndex = i
-        }
-    }
-
-    if(closestSphereIndex<0) return miss()
-
-    return hit(ray, t, closestSphereIndex)
-}
-
-// Calculate and return the background colour based on the ray
-function backgroundColour(ray)
-{
-        let white = new Vec3(1,1,1)
-        let blue = new Vec3(0.3,0.5,0.9)
-        t = 0.5*(ray.direction.y + 1.0)
-        return white.scale(1-t).add(blue.scale(t))
-}
-
-function specular(ray, castResult)
-{
-    let intersectionNormal = castResult.normal
-    let intersectionPoint = castResult.position
-    let reflection = lightDirection.minus(intersectionNormal.scale(intersectionNormal.dot(lightDirection)*2))
-    let viewDirection = camPosition.minus(intersectionPoint)
-    return (Math.pow(Math.max(viewDirection.dot(reflection),0), 4))
-    
-}
-
-function reflection(ray, castResult)       
-{
-    let normal = castResult.normal
-    let point = castResult.position
-    
-    reflectionResult = ray.direction.minus(normal.scale(2*ray.direction.dot(normal)))   //calculates the reflected ray
-
-    return new Ray(point, reflectionResult)
-}
-
-function shadow(ray, castResult)
-{
-    let intersectionPoint = castResult.position
-    let shadowCast = new Ray(intersectionPoint, negLightDirection)
-    let shadowResult = traceRay(shadowCast)
-    if(shadowResult.t < 0) return 1
-    return 0.4
-}
-
-function Phong(ray, castResult)     //phong lighting handling for both normal rays and reflected rays
-{
-    let albedo = spheres[castResult.sphereIndex].colour
-    let diffuse = Math.max(castResult.normal.dot(negLightDirection), 0)
-    let specularScalar = specular(ray, castResult) * 0.8
-    let colour = albedo.scale(Math.sqrt(diffuse + 0.05 + specularScalar)*shadow(ray, castResult))
-    return colour
-}
-// Returns the colour the ray should have as a Vec3 with RGB values in [0,1]
-function rayColour(ray) 
-{
-    let castResult = traceRay(ray)
-    if(castResult.t < 0) return backgroundColour(ray)
-	if(castResult.sphereIndex > 2)                          //Any sphere of index greater than two is treated as reflective
-    {
-        let reflectedRay = reflection(ray, castResult)
-        let reflectedRayResult = traceRay(reflectedRay)
-        if(reflectedRayResult.sphereIndex != -1)
-        {
-        return Phong(reflectedRay, reflectedRayResult) 
-        }
-        return backgroundColour(reflectedRay)
-	}
-   
-    return Phong(ray, castResult)
-}
-
-// Sets a pixel at (x, y) in the canvas with an RGB Vec3
-function setPixel(x, y, colour)
-{
-    var c = document.getElementById("canvas")
-    var ctx = c.getContext("2d")
-    ctx.fillStyle = "rgba("+colour.x+","+colour.y+","+colour.z+","+1+")"
-    ctx.fillRect(x, c.height - y, 1, 1)
-}
-
-const spheres = new Array(
-    new Sphere(new Vec3(0,0,-1), 0.3, new Vec3(1,0,0)),       // Red sphere
-    new Sphere(new Vec3(0,0.2,-0.8), 0.15, new Vec3(0,0,1)),  // Blue sphere
-    new Sphere(new Vec3(0,-100.5,0), 100, new Vec3(0,1,0)),   // Big green sphere
-    new Sphere(new Vec3(-1,0.2,-1.5), 0.3, new Vec3(1,1,1)));
-
-
-// Main code
-let imageWidth = document.getElementById("canvas").width
-let imageHeight = document.getElementById("canvas").height
-let aspectRatio = imageHeight / imageWidth
-
-let viewportWidth = 2
-let viewportHeight = viewportWidth * aspectRatio
-let focalLength = 1.0
-
-let camPosition = new Vec3(0,0,0)
-let horizontal = new Vec3(viewportWidth, 0, 0)
-let vertical = new Vec3(0, viewportHeight, 0)
-let lowerLeftCorner = camPosition.minus(horizontal.scale(0.5)).minus(vertical.scale(0.5)).minus(new Vec3(0, 0, focalLength))
-
-let colour = new Vec3(0,0,0)
-let lightDirection = new Vec3(-1.1, -1.3, -1.5).normalised()
-let negLightDirection = new Vec3(-lightDirection.x, -lightDirection.y, -lightDirection.z)
-
-let numberOfSamples = 50
-
-for (let i = 0; i < imageWidth; i++)
-{
-    for (let j = 0; j <= imageHeight; j++)
-    {
-        let colour = new Vec3(0,0,0)
-        for (let k = 0; k < numberOfSamples; k++)
-        {
-            let u = (i + Math.random()) / (imageWidth-1)
-            let v = (j + Math.random()) / (imageHeight-1)
-        
-            let ray = new Ray(camPosition, lowerLeftCorner.add(horizontal.scale(u)).add(vertical.scale(v)).minus(camPosition))
-            colour = colour.add(rayColour(ray))
-        }
-        let scale = 1 / numberOfSamples
-        colour = colour.scale(scale * 255)
-        setPixel(i,j,colour)
-    }
-}
-
-</script>
-
+<div class="layout">
+    <div id="sidebar">
+        <nav class="site-nav" aria-label="Primary navigation">
+            <div class="nav-inner">
+                <a class="nav-brand" href="index.html"><span class="nav-monogram">LD</span><span>Luigi De Marco</span></a>
+                <button id="navToggle" class="nav-toggle" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+                <ul id="navLinks" class="nav-links"><li><a href="index.html#work">Projects</a></li><li><a href="index.html#skills">Skills</a></li><li><a href="index.html#about">About</a></li></ul>
+                <div class="nav-social" aria-label="Social links">
+                    <a class="icon-link" href="https://github.com/Luigionnaire" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.03c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+                    <a class="icon-link" href="https://www.linkedin.com/in/luigi-de-marco-072406282" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+                    <button class="icon-link email-copy" type="button" aria-label="Copy email address" title="Copy email address"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.4l10 6.25L22 6.4V6H2zm20 2.75-9.47 5.92a1 1 0 0 1-1.06 0L2 8.75V18h20V8.75z"/></svg></button>
+                </div>
+                <span id="copyStatus" class="copy-status" role="status" aria-live="polite"></span>
+            </div>
+        </nav>
+    </div>
+    <script src="loadNav.js"></script>
+    <main class="content project-detail">
+        <header class="project-hero">
+            <p class="eyebrow">Graphics programming · JavaScript</p>
+            <h1>Software Ray Tracer</h1>
+            <p class="project-lede">A small CPU ray tracer written in JavaScript that casts rays through a scene of spheres and writes the result pixel-by-pixel to an HTML canvas.</p>
+            <div class="project-actions">
+                <a class="button button-primary" href="rayTracerDemo.html">Run the renderer</a>
+                <a class="button button-secondary" href="graphicsProgramming.html">All graphics projects</a>
+            </div>
+        </header>
+        <img class="project-media" src="media/raytracer.png" alt="Output from the JavaScript software ray tracer">
+        <section class="detail-section">
+            <h2>Features</h2>
+            <ul class="detail-list">
+                <li>Ray-sphere intersection tests using a quadratic equation.</li>
+                <li>Closest-hit selection and surface-normal calculation.</li>
+                <li>Background gradient for rays that miss the scene.</li>
+                <li>Phong-style diffuse and specular lighting with hard shadow tests.</li>
+                <li>Single-bounce reflections for selected spheres.</li>
+                <li>50 jittered samples per pixel to reduce sampling artefacts.</li>
+                <li>Pixel output through the Canvas 2D context.</li>
+            </ul>
+        </section>
+        <section class="detail-section detail-grid">
+            <div class="detail-panel">
+                <h3>Concepts applied</h3>
+                <ul class="detail-list">
+                    <li>Vector arithmetic, dot products, normalisation, and ray parameterisation.</li>
+                    <li>Analytic ray-primitive intersection and nearest-hit tracing.</li>
+                    <li>Surface normals, lighting, shadows, and reflections.</li>
+                    <li>Camera viewport construction and stochastic pixel sampling.</li>
+                </ul>
+            </div>
+            <div class="detail-panel">
+                <h3>Libraries and technologies</h3>
+                <ul class="detail-list">
+                    <li>JavaScript and the browser Canvas 2D API.</li>
+                    <li>No external libraries are referenced by the demo.</li>
+                    <li class="placeholder-note">Original runtime/browser compatibility targets: [Add if known].</li>
+                </ul>
+            </div>
+        </section>
+        <section class="detail-section">
+            <h2>Skills developed</h2>
+            <ul class="detail-list">
+                <li>Translating vector and ray-tracing mathematics into code.</li>
+                <li>Structuring a renderer around rays, geometry, intersections, and shading.</li>
+                <li>Mapping computed colour values into a raster image.</li>
+                <li>Understanding sampling quality and the cost of per-pixel CPU rendering.</li>
+            </ul>
+            <p class="placeholder-note">Known limitation: rendering is synchronous and may be slow. Any optimisation work or plans: [Add details].</p>
+        </section>
+    </main>
+</div>
 </body>
 </html>

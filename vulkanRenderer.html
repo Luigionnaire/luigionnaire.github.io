@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vulkan Renderer - Luigi De Marco</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+    <div id="sidebar">
+        <nav class="site-nav" aria-label="Primary navigation">
+            <div class="nav-inner">
+                <a class="nav-brand" href="index.html"><span class="nav-monogram">LD</span><span>Luigi De Marco</span></a>
+                <button id="navToggle" class="nav-toggle" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+                <ul id="navLinks" class="nav-links"><li><a href="index.html#work">Projects</a></li><li><a href="index.html#skills">Skills</a></li><li><a href="index.html#about">About</a></li></ul>
+                <div class="nav-social" aria-label="Social links">
+                    <a class="icon-link" href="https://github.com/Luigionnaire" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 4.03c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+                    <a class="icon-link" href="https://www.linkedin.com/in/luigi-de-marco-072406282" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+                    <button class="icon-link email-copy" type="button" aria-label="Copy email address" title="Copy email address"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.4l10 6.25L22 6.4V6H2zm20 2.75-9.47 5.92a1 1 0 0 1-1.06 0L2 8.75V18h20V8.75z"/></svg></button>
+                </div>
+                <span id="copyStatus" class="copy-status" role="status" aria-live="polite"></span>
+            </div>
+        </nav>
+    </div>
+    <script src="loadNav.js"></script>
+    <main class="content project-detail">
+        <header class="project-hero">
+            <p class="eyebrow">Graphics programming · University final project</p>
+            <h1>Vulkan Renderer</h1>
+            <p class="project-lede">A rendering application built from scratch for the Games Programming course at De Montfort University. It uses Vulkan to render a 3D scene with physically based lighting.</p>
+            <div class="project-actions">
+                <a class="button button-primary" href="https://github.com/Luigionnaire/VulkanApp" target="_blank" rel="noopener noreferrer">View repository</a>
+                <a class="button button-secondary" href="graphicsProgramming.html">All graphics projects</a>
+            </div>
+        </header>
+        <video class="project-media" controls muted loop playsinline aria-label="Vulkan renderer demonstration">
+            <source src="media/vulkan_video.mp4" type="video/mp4">
+        </video>
+        <section class="detail-section">
+            <h2>Project overview</h2>
+            <p>The project delivers a 3D rendering application using Vulkan and physically based rendering (PBR). The project, including its build files and dependencies, was assembled from scratch as the final deliverable for the Games Programming course.</p>
+        </section>
+        <section class="detail-section">
+            <h2>Features</h2>
+            <ul class="detail-list">
+                <li>Renders a 3D scene through the Vulkan API.</li>
+                <li>Uses physically based lighting.</li>
+                <li>Includes project build files and dependency setup created as part of the project.</li>
+            </ul>
+        </section>
+        <section class="detail-section detail-grid">
+            <div class="detail-panel">
+                <h3>Concepts and tools</h3>
+                <ul class="detail-list">
+                    <li>Vulkan graphics programming and renderer structure.</li>
+                    <li>Physically based rendering and lighting.</li>
+                    <li>C++ application and build/dependency setup.</li>
+                </ul>
+            </div>
+            <div class="detail-panel">
+                <h3>Libraries and environment</h3>
+                <ul class="detail-list">
+                    <li>Vulkan API.</li>
+                    <li class="placeholder-note">Other libraries, Vulkan SDK/version, compiler, and build-system details: [Add exact names and versions].</li>
+                </ul>
+            </div>
+        </section>
+        <section class="detail-section">
+            <h2>Skills developed</h2>
+            <ul class="detail-list">
+                <li>Building a graphics application and its build setup from the ground up.</li>
+                <li>Applying PBR concepts in a real-time rendering project.</li>
+                <li>Working with a low-level graphics API in C++.</li>
+            </ul>
+            <p class="placeholder-note">Specific engineering challenges, design decisions, and performance results: [Add examples from the project].</p>
+        </section>
+    </main>
+</div>
+</body>
+</html>
